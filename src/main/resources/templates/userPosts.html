@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Posts</title>
+</head>
+<body>
+<h1>All Posts by <a th:text="${userName}"></a></h1>
+
+<form th:action="@{/userPosts}" th:method="get">
+
+</form>
+<tr th:each="post : ${posts}">
+    <th><h3 th:text="${post.getTitle()}" scope="row"></h3></th>
+    <td><p th:text="${post.getText()}"></p></td>
+    <td><p th:text="${post.getUser().getLogin()}"></p></td>
+    <td><p th:text="${post.getDateTime()}"></p></td>
+</tr>
+
+</body>
+</html>

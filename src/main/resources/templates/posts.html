@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>posts</title>
+</head>
+<body>
+
+<form th:action="@{/logout}" th:method="post">
+    <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+    <input type="submit" value="Sign Out"/>
+</form>
+<form><span><a href="/user">User List</a> </span></form>
+<div>
+    <form th:method="get" th:action="@{/posts}">
+        <div><label><input type="text" name="title" placeholder="Введите название"/></label></div>
+        <div><label><input type="text" name="text" placeholder="Текст"></label></div>
+        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+        <button type="submit">Добавить</button>
+    </form>
+</div>
+
+<div><h1> Список постов:</h1></div>
+<form th:action="@{/posts}" th:method="get">
+    <input th:type="text" th:name="title" th:value="${title}" placeholder="Title"/>
+    <button type="submit">Найти</button>
+</form>
+
+
+
+    <h1>Posts list</h1>
+
+    <tr th:each="post : ${posts}">
+        <th><h3 th:text="${post.getTitle()}" scope="row"></h3></th>
+        <td><p th:text="${post.getText()}"></p></td>
+        <td><p th:text="${post.getUser().getLogin()}"></p></td>
+        <td><p th:text="${post.getDateTime()}"></p></td>
+        </tr>
+
+
+
+</body>
+</html>
